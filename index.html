@@ -28,7 +28,8 @@
             background: rgba(250, 249, 246, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 40px;
+            padding: 60px 40px;
+            margin: 40px 0;
             max-width: 900px;
             width: 95%;
             box-shadow: 0 8px 32px rgba(20, 23, 26, 0.5);
@@ -51,10 +52,7 @@
             font-weight: 700;
             font-size: 2.5rem;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #ba2b2b, #1da1f2, #56e8a2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #faf9f6;
             animation: glow 2s ease-in-out infinite alternate;
         }
 
@@ -119,7 +117,7 @@
         }
 
         .challenge-title {
-            color: #ba2b2b;
+            color: #faf9f6;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             margin-bottom: 15px;
@@ -294,8 +292,10 @@
         }
 
         .emoji {
-            font-size: 1.5rem;
-            margin-right: 10px;
+            font-size: 2.2rem;
+            margin-right: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
         }
 
         .highlight {
@@ -333,7 +333,7 @@
             </div>
 
             <div class="coding-challenge">
-                <div class="challenge-title"><span class="emoji">🎯</span>Problem-Solving Challenge</div>
+                <div class="challenge-title"><span class="emoji">🧩</span>Problem-Solving Challenge</div>
                 <div class="scenario-box">
                     <strong>The Situation:</strong> Your team gets 50+ customer emails daily, and Sarah spends 2 hours just sorting them into "Bug Report," "Feature Request," and "General Question" folders.
                 </div>
@@ -386,7 +386,7 @@
                         correct: false 
                     },
                     { 
-                        text: "📊 Create a complex flowchart", 
+                        text: "📈 Create a complex flowchart", 
                         description: "Design a detailed diagram with every possible email scenario", 
                         correct: false 
                     }
@@ -406,12 +406,12 @@
                         correct: true 
                     },
                     { 
-                        text: "📝 Write a long paragraph explaining what bug reports look like", 
+                        text: "📚 Write a long paragraph explaining what bug reports look like", 
                         description: "Give the AI a detailed essay about bug report characteristics", 
                         correct: false 
                     },
                     { 
-                        text: "🎲 Let the AI figure it out randomly", 
+                        text: "🎰 Let the AI figure it out randomly", 
                         description: "Trust the AI to guess correctly based on general intelligence", 
                         correct: false 
                     }
@@ -461,7 +461,7 @@
                         correct: false 
                     },
                     { 
-                        text: "📨 1) Collect all emails → 2) Sort them manually → 3) Let AI learn from examples → 4) Hope it works", 
+                        text: "📚 1) Collect all emails → 2) Sort them manually → 3) Let AI learn from examples → 4) Hope it works", 
                         description: "Batch processing with manual oversight", 
                         correct: false 
                     }
@@ -481,7 +481,7 @@
                         correct: true 
                     },
                     { 
-                        text: "🤷 \"Just try to be more helpful next time\"", 
+                        text: "🤷‍♂️ \"Just try to be more helpful next time\"", 
                         description: "Generic advice without specific guidance", 
                         correct: false 
                     },
@@ -508,7 +508,7 @@
             const challengeSection = document.querySelector('.coding-challenge');
             if (currentData.concept === 'AI Agent Communication') {
                 challengeSection.innerHTML = `
-                    <div class="challenge-title"><span class="emoji">🎯</span>Master Challenge: Real-time AI Communication</div>
+                    <div class="challenge-title"><span class="emoji">🎮</span>Master Challenge: Real-time AI Communication</div>
                     <div class="scenario-box">
                         <strong>The Situation:</strong> ${currentData.challenge}
                     </div>
@@ -516,7 +516,7 @@
                 `;
             } else {
                 challengeSection.innerHTML = `
-                    <div class="challenge-title"><span class="emoji">🎯</span>${currentData.concept} Challenge</div>
+                    <div class="challenge-title"><span class="emoji">🧩</span>${currentData.concept} Challenge</div>
                     <div class="scenario-box">
                         <strong>The Situation:</strong> ${currentData.challenge}
                     </div>
