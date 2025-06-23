@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Builder Academy: The Automation Quest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #14171A 0%, #1da1f2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #faf9f6;
+            overflow-x: hidden;
+        }
+
+        .game-container {
+            background: rgba(250, 249, 246, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 95%;
+            box-shadow: 0 8px 32px rgba(20, 23, 26, 0.5);
+            border: 1px solid rgba(250, 249, 246, 0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .game-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ba2b2b, #1da1f2, #56e8a2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(186, 43, 43, 0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(29, 161, 242, 0.5)); }
+        }
+
+        .game-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .story-section {
+            background: rgba(250, 249, 246, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #56e8a2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #56e8a2, transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .story-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .coding-challenge {
+            background: rgba(20, 23, 26, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid #ba2b2b;
+            position: relative;
+        }
+
+        .challenge-title {
+            color: #ba2b2b;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .scenario-box {
+            background: rgba(29, 161, 242, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 3px solid #1da1f2;
+        }
+
+        .choices {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .choice-btn {
+            background: linear-gradient(45deg, #1da1f2, #56e8a2);
+            border: none;
+            color: #faf9f6;
+            padding: 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(20, 23, 26, 0.3);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .choice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(250, 249, 246, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .choice-btn:hover::before {
+            left: 100%;
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 23, 26, 0.4);
+            background: linear-gradient(45deg, #ffb948, #edd943);
+        }
+
+        .choice-btn strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .choice-btn small {
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .progress-bar {
+            background: rgba(250, 249, 246, 0.2);
+            height: 12px;
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #ba2b2b, #1da1f2, #56e8a2);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.8s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(250, 249, 246, 0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat {
+            background: rgba(250, 249, 246, 0.1);
+            padding: 12px 18px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(250, 249, 246, 0.1);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .concept-preview {
+            background: rgba(20, 23, 26, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'DM Sans', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            border: 1px solid rgba(250, 249, 246, 0.2);
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-weight: 500;
+            animation: feedbackAppear 0.5s ease-out;
+        }
+
+        @keyframes feedbackAppear {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .feedback.correct {
+            background: rgba(86, 232, 162, 0.2);
+            border-left: 4px solid #56e8a2;
+            color: #faf9f6;
+        }
+
+        .feedback.incorrect {
+            background: rgba(186, 43, 43, 0.2);
+            border-left: 4px solid #ba2b2b;
+            color: #faf9f6;
+        }
+
+        .restart-btn {
+            background: linear-gradient(45deg, #ba2b2b, #ffb948);
+            border: none;
+            color: #faf9f6;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: rgba(237, 217, 67, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #edd943;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1 class="game-title">AI Builder Academy</h1>
+            <p class="game-subtitle">The Automation Quest</p>
+            <p class="tagline">Master the logic behind no-code AI tools</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">Chapter: <span id="level">1</span></div>
+            <div class="stat">Logic Points: <span id="score">0</span></div>
+            <div class="stat">Skill: <span id="concept">Problem Solving</span></div>
+        </div>
+
+        <div class="story-section" id="storySection">
+            <div class="story-text" id="storyText">
+                Welcome to TechCorp, the hottest startup in Silicon Valley! You're the new intern, and your boss just dropped some exciting news: "We need to automate our boring tasks and build some AI agents to help our team work smarter, not harder."
+                
+                Your mentor, Alex, grins and says: "Perfect timing! I'll teach you the secret to using no-code tools like Cursor, Lovable, and Zapier. But first, you need to think like a problem-solver. Every automation starts with understanding the problem."
+            </div>
+
+            <div class="coding-challenge">
+                <div class="challenge-title"><span class="emoji">🎯</span>Problem-Solving Challenge</div>
+                <div class="scenario-box">
+                    <strong>The Situation:</strong> Your team gets 50+ customer emails daily, and Sarah spends 2 hours just sorting them into "Bug Report," "Feature Request," and "General Question" folders.
+                </div>
+                <p>Alex asks: "Before we build anything, what's the FIRST step in automation thinking?"</p>
+            </div>
+
+            <div class="choices" id="choices">
+                <button class="choice-btn" onclick="makeChoice(0)">
+                    <strong>🔍 Identify the pattern</strong><br>
+                    <small>Look for what's similar about emails that go into each folder - keywords, sender types, content structure</small>
+                </button>
+                <button class="choice-btn" onclick="makeChoice(1)">
+                    <strong>⚡ Jump straight to coding</strong><br>
+                    <small>Start building the automation tool immediately to save time</small>
+                </button>
+                <button class="choice-btn" onclick="makeChoice(2)">
+                    <strong>📊 Create a complex flowchart</strong><br>
+                    <small>Design a detailed diagram with every possible email scenario</small>
+                </button>
+            </div>
+        </div>
+
+        <div id="feedback" class="feedback" style="display: none;"></div>
+    </div>
+
+    <script>
+        let currentLevel = 1;
+        let score = 0;
+        let gameState = {
+            level: 1,
+            story: 0,
+            concept: 'Problem Solving'
+        };
+
+        const gameData = [
+            {
+                concept: 'Problem Solving',
+                story: "Welcome to TechCorp, the hottest startup in Silicon Valley! You're the new intern, and your boss just dropped some exciting news: \"We need to automate our boring tasks and build some AI agents to help our team work smarter, not harder.\"\n\nYour mentor, Alex, grins and says: \"Perfect timing! I'll teach you the secret to using no-code tools like Cursor, Lovable, and Zapier. But first, you need to think like a problem-solver. Every automation starts with understanding the problem.\"",
+                challenge: "The Situation: Your team gets 50+ customer emails daily, and Sarah spends 2 hours just sorting them into \"Bug Report,\" \"Feature Request,\" and \"General Question\" folders.",
+                prompt: "Alex asks: \"Before we build anything, what's the FIRST step in automation thinking?\"",
+                choices: [
+                    { 
+                        text: "🔍 Identify the pattern", 
+                        description: "Look for what's similar about emails that go into each folder - keywords, sender types, content structure", 
+                        correct: true 
+                    },
+                    { 
+                        text: "⚡ Jump straight to coding", 
+                        description: "Start building the automation tool immediately to save time", 
+                        correct: false 
+                    },
+                    { 
+                        text: "📊 Create a complex flowchart", 
+                        description: "Design a detailed diagram with every possible email scenario", 
+                        correct: false 
+                    }
+                ],
+                correctFeedback: "🎉 Excellent! Alex nods approvingly: \"Exactly! Pattern recognition is the foundation of all automation. You noticed that emails with words like 'crash', 'error', 'broken' are usually bug reports, while 'I wish', 'could you add', 'feature' indicate feature requests. This is how AI tools learn to categorize things - by recognizing patterns in data!\"",
+                incorrectFeedback: "Alex shakes their head: \"Hold up! Before we build anything, we need to understand what makes each email different. The secret sauce of automation is recognizing patterns first. What keywords, phrases, or characteristics help humans decide which folder an email belongs in?\""
+            },
+            {
+                concept: 'If-Then Logic',
+                story: "Great work on pattern recognition! Alex pulls up a laptop and opens a no-code automation tool. \"Now that we understand the patterns, let's think about decision-making. Every smart automation uses IF-THEN logic.\"\n\nThey show you the screen: \"Look, here's how we tell our AI agent what to do. It's like giving very specific instructions to a really smart but literal-minded assistant.\"",
+                challenge: "Your email sorting bot needs to make decisions. You've identified that emails containing 'bug', 'crash', 'error', or 'broken' should go to the Bug Report folder.",
+                prompt: "How would you structure this logic for an automation tool?",
+                choices: [
+                    { 
+                        text: "🤖 IF email contains 'bug' OR 'crash' OR 'error' OR 'broken' THEN move to Bug Reports", 
+                        description: "Use clear conditional logic with OR operators to catch all variations", 
+                        correct: true 
+                    },
+                    { 
+                        text: "📝 Write a long paragraph explaining what bug reports look like", 
+                        description: "Give the AI a detailed essay about bug report characteristics", 
+                        correct: false 
+                    },
+                    { 
+                        text: "🎲 Let the AI figure it out randomly", 
+                        description: "Trust the AI to guess correctly based on general intelligence", 
+                        correct: false 
+                    }
+                ],
+                correctFeedback: "🚀 Perfect! Alex grins: \"You're thinking like a pro! That's exactly how tools like Zapier, Make, and AI agents work - they follow IF-THEN rules. The OR operator is crucial because people describe bugs differently. Some say 'crashed', others say 'error occurred'. Your logic catches them all!\"",
+                incorrectFeedback: "Alex pauses the demo: \"Remember, automation tools need SPECIFIC instructions. They can't read between the lines like humans. We need clear IF-THEN statements: IF this condition is met, THEN do this action. Try thinking in terms of exact conditions!\""
+            },
+            {
+                concept: 'Prompt Engineering',
+                story: "\"Now for the really cool part,\" Alex says, opening Cursor. \"Modern no-code tools use AI, and the secret weapon is knowing how to talk to AI effectively. This is called 'prompt engineering' - it's like being a really good communicator with a super-smart but literal friend.\"\n\nYou see a chat interface where Alex is building an AI agent. \"Watch this - I'm going to ask AI to help us create a customer service bot that can handle basic questions.\"",
+                challenge: "You need to create an AI agent that helps customers with password resets. The agent should be helpful but also know when to escalate to a human.",
+                prompt: "Which prompt will give you the best results when setting up your AI agent?",
+                choices: [
+                    { 
+                        text: "📋 \"You are a helpful customer service agent. When users ask about password resets, guide them through: 1) Check email for reset link, 2) Check spam folder, 3) Try reset form again. If user still has issues after these steps, say 'Let me connect you with a human agent' and escalate.\"", 
+                        description: "Clear role definition, step-by-step instructions, and escalation rules", 
+                        correct: true 
+                    },
+                    { 
+                        text: "🤖 \"Help customers with their problems\"", 
+                        description: "Simple and general instruction", 
+                        correct: false 
+                    },
+                    { 
+                        text: "💬 \"Be nice and answer questions about passwords and stuff\"", 
+                        description: "Casual and vague guidance", 
+                        correct: false 
+                    }
+                ],
+                correctFeedback: "🎯 Brilliant! Alex points excitedly: \"THAT'S how you prompt like a pro! You gave the AI a clear role, specific steps, and exact words to use. You even told it when to escalate. This is the secret to making AI agents that actually work reliably. Tools like Cursor and Lovable respond amazingly well to detailed, structured prompts like this.\"",
+                incorrectFeedback: "Alex winces: \"Ouch, that prompt is too vague! AI agents need specific instructions, just like a new employee would. They need to know their role, the exact steps to follow, and when to ask for help. Vague prompts lead to unpredictable behavior.\""
+            },
+            {
+                concept: 'Automation Workflows',
+                story: "\"Time for the grand finale!\" Alex announces, pulling up a workflow builder. \"You've learned pattern recognition, IF-THEN logic, and prompt engineering. Now let's connect everything together into a workflow - this is how tools like Zapier, Make, and n8n work.\"\n\nThe screen shows a visual flow: \"Every automation is like a digital assembly line. Data comes in, gets processed through steps, and actions happen. Let's build the complete email sorting system!\"",
+                challenge: "Design the complete workflow for automated email sorting. You need to connect all the pieces: receiving emails, analyzing them, making decisions, and taking actions.",
+                prompt: "What's the correct order for your automation workflow?",
+                choices: [
+                    { 
+                        text: "📧 1) Trigger: New email arrives → 2) Analyze: Check for keywords → 3) Decide: IF-THEN logic → 4) Action: Move to correct folder → 5) Notify: Send confirmation", 
+                        description: "Logical flow from trigger through analysis, decision-making, action, and notification", 
+                        correct: true 
+                    },
+                    { 
+                        text: "🔄 1) Move emails → 2) Check what they were about → 3) Fix any mistakes → 4) Send notification", 
+                        description: "Act first, then analyze the results", 
+                        correct: false 
+                    },
+                    { 
+                        text: "📨 1) Collect all emails → 2) Sort them manually → 3) Let AI learn from examples → 4) Hope it works", 
+                        description: "Batch processing with manual oversight", 
+                        correct: false 
+                    }
+                ],
+                correctFeedback: "🏆 OUTSTANDING! Alex cheers: \"You've got it! That's the perfect automation workflow - Trigger → Analyze → Decide → Act → Notify. This is exactly how professional automations work. You understand the logical flow that makes tools like Zapier and Make so powerful. You're ready to build real automations!\"",
+                incorrectFeedback: "Alex scratches their head: \"Hmm, that workflow has some issues. Remember, good automation follows a logical sequence: something triggers it, it analyzes the data, makes a decision based on rules, takes action, then confirms what happened. Think about the natural order!\""
+            },
+            {
+                concept: 'AI Agent Communication',
+                story: "\"Congratulations!\" Alex says, as the final pieces click into place. \"You've mastered the core concepts. But there's one more superpower - knowing how to communicate with AI agents effectively in real-time conversations.\"\n\nThey show you a chat with an AI agent: \"Sometimes you need to give your AI agent new instructions or handle edge cases. This is where conversation skills matter - you need to be clear, specific, and know how to course-correct when things go wrong.\"",
+                challenge: "Your AI customer service agent just told a customer 'I don't know' when asked about a new product feature that launched yesterday. The customer is getting frustrated.",
+                prompt: "How do you quickly update your AI agent to handle this situation?",
+                choices: [
+                    { 
+                        text: "💡 \"I need to update your knowledge. The new product feature launched yesterday. When customers ask about [feature name], explain [specific details] and offer to send them the tutorial link. For this current customer, apologize for the confusion and provide the information now.\"", 
+                        description: "Clear knowledge update with specific instructions and immediate problem resolution", 
+                        correct: true 
+                    },
+                    { 
+                        text: "🤷 \"Just try to be more helpful next time\"", 
+                        description: "Generic advice without specific guidance", 
+                        correct: false 
+                    },
+                    { 
+                        text: "🔄 \"Restart the conversation and pretend this didn't happen\"", 
+                        description: "Avoid the issue rather than addressing it", 
+                        correct: false 
+                    }
+                ],
+                correctFeedback: "🎉 PERFECT! Alex gives you a high-five: \"That's expert-level AI communication! You provided specific knowledge, clear instructions for future cases, AND handled the immediate customer issue. This is how pros manage AI agents in real-world scenarios. You're now ready to build amazing automations and AI agents with any no-code platform!\"",
+                incorrectFeedback: "Alex sighs: \"That won't help our frustrated customer or prevent future issues. When AI agents make mistakes, you need to give them specific, actionable updates. Think: What exact information does the agent need? How should it handle similar situations? And what should it do RIGHT NOW?\""
+            }
+        ];
+
+        function updateDisplay() {
+            const currentData = gameData[gameState.story];
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('score').textContent = score;
+            document.getElementById('concept').textContent = currentData.concept;
+            document.getElementById('progressFill').style.width = ((gameState.story + 1) / gameData.length * 100) + '%';
+            
+            document.getElementById('storyText').innerHTML = currentData.story;
+            
+            const challengeSection = document.querySelector('.coding-challenge');
+            if (currentData.concept === 'AI Agent Communication') {
+                challengeSection.innerHTML = `
+                    <div class="challenge-title"><span class="emoji">🎯</span>Master Challenge: Real-time AI Communication</div>
+                    <div class="scenario-box">
+                        <strong>The Situation:</strong> ${currentData.challenge}
+                    </div>
+                    <p>${currentData.prompt}</p>
+                `;
+            } else {
+                challengeSection.innerHTML = `
+                    <div class="challenge-title"><span class="emoji">🎯</span>${currentData.concept} Challenge</div>
+                    <div class="scenario-box">
+                        <strong>The Situation:</strong> ${currentData.challenge}
+                    </div>
+                    <p>${currentData.prompt}</p>
+                `;
+            }
+            
+            const choicesContainer = document.getElementById('choices');
+            choicesContainer.innerHTML = '';
+            
+            currentData.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.onclick = () => makeChoice(index);
+                button.innerHTML = `
+                    <strong>${choice.text}</strong><br>
+                    <small>${choice.description}</small>
+                `;
+                choicesContainer.appendChild(button);
+            });
+        }
+
+        function makeChoice(choiceIndex) {
+            const currentData = gameData[gameState.story];
+            const choice = currentData.choices[choiceIndex];
+            const feedbackDiv = document.getElementById('feedback');
+            
+            feedbackDiv.style.display = 'block';
+            
+            if (choice.correct) {
+                feedbackDiv.className = 'feedback correct';
+                feedbackDiv.textContent = currentData.correctFeedback;
+                score += 200;
+                
+                setTimeout(() => {
+                    if (gameState.story < gameData.length - 1) {
+                        gameState.story++;
+                        gameState.level++;
+                        feedbackDiv.style.display = 'none';
+                        updateDisplay();
+                    } else {
+                        // Game completed
+                        feedbackDiv.innerHTML = currentData.correctFeedback + '<br><br>🎊 <strong>Mission Complete!</strong> You\'ve mastered the core skills needed to build automations and AI agents with no-code tools. You understand pattern recognition, logical thinking, prompt engineering, workflow design, and AI communication. Time to start building!<br><br><button class="restart-btn" onclick="restartGame()">Start New Quest</button>';
+                    }
+                }, 4000);
+            } else {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.textContent = currentData.incorrectFeedback;
+                setTimeout(() => {
+                    feedbackDiv.style.display = 'none';
+                }, 4000);
+            }
+        }
+
+        function restartGame() {
+            gameState = { level: 1, story: 0, concept: 'Problem Solving' };
+            score = 0;
+            document.getElementById('feedback').style.display = 'none';
+            updateDisplay();
+        }
+
+        // Initialize the game
+        updateDisplay();
+    </script>
+</body>
+</html>
